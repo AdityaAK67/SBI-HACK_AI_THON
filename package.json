@@ -1,0 +1,61 @@
+{
+  "name": "security",
+  "displayName": "SBI_LIFE",
+  "description": "SBI_LIFE extension for vulnerability scanning and auto fixing.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Other",
+    "Linters"
+  ],
+  "activationEvents": [
+    "onCommand:secure.scanCode",
+    "onCommand:secure.toggleAutoScan",
+    "*"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Secure Scan Settings",
+      "properties": {
+        "secure.autoScan": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable automatic scanning on file save."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "secure.scanCode",
+        "title": "Run Vulnerability Scan"
+      },
+      {
+        "command": "secure.toggleAutoScan",
+        "title": "Toggle Auto Scan on Save"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test",
+    "fix": "node fixer/autoFixer.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.70.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.5.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "eslint": "^8.57.1",
+    "openai": "^5.3.0"
+  },
+  "license": "MIT"
+}
